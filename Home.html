@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .nav {
+        border: 1px solid black;
+        height: 60px;
+        background-color: teal;
+        box-shadow: rgba(146, 182, 217, 0.2) 0px 8px 24px;
+      }
+      .nav > ul > li {
+        list-style: none;
+      }
+      .nav ul a {
+        text-decoration: none;
+        color: bisque;
+        font-size: 25px;
+      }
+      .nav ul {
+        display: flex;
+        justify-content: space-between;
+      }
+      .form {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px,
+          rgb(51, 51, 51) 0px 0px 0px 3px;
+        width: 290px;
+        margin: auto;
+      }
+      .form input {
+        width: 250px;
+        padding: 20px;
+      }
+      .form select {
+        padding: 20px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <!-- navbar -->
+      <div class="nav">
+        <ul>
+          <li><a href="./Home.html">Home</a></li>
+          <li><a href="./Dashboard.html">Dashboard</a></li>
+          <li><a href="./Mybook.html">MyBook</a></li>
+          <li><a href="./Bookmark.html">Bookmark</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h1>Home</h1>
+
+      <form class="form" id="form">
+        <input type="text" name="" id="name" placeholder="Bookname" /><br />
+        <input type="text" name="" id="Auth" placeholder="Authername" /><br />
+        <input type="text" name="" id="desc" placeholder="BookDescr" /><br />
+        <input type="date" name="" id="date" placeholder="Adddate" /><br />
+
+        <select name="" id="cat" onchange="filterBycat()">
+          <option value="sports">sports</option>
+          <option value="fiction">fiction</option>
+          <option value="finance">finance</option>
+          <option value="Education">Education</option></select
+        ><br />
+        <input type="text" name="" id="price" placeholder="price" /><br />
+        <input
+          type="submit"
+          style="background-color: teal; width: 290px; font-size: 20px"
+          id="submit"
+        /><br />
+      </form>
+    </div>
+  </body>
+</html>
+
+<script>
+  let bookArray = JSON.parse(localStorage.getItem('book-list')) || [];
+  document.getElementById('form').addEventListener('submit', formdata);
+
+  function formdata(e) {
+    e.preventDefault();
+
+    var obj = {
+      Book_name: document.getElementById('name').value,
+      Book_Auth: document.getElementById('Auth').value,
+      Book_desc: document.getElementById('desc').value,
+      Book_price: document.getElementById('price').value,
+      Book_date: document.getElementById('date').value,
+      Book_cat: document.getElementById('cat').value,
+    };
+
+    bookArray.push(obj);
+    console.log('obj:', obj);
+    localStorage.setItem('book-list', JSON.stringify(bookArray));
+  }
+</script>

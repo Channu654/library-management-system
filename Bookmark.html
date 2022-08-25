@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .nav {
+        border: 1px solid black;
+        height: 60px;
+        background-color: teal;
+        box-shadow: rgba(146, 182, 217, 0.2) 0px 8px 24px;
+      }
+      .nav > ul > li {
+        list-style: none;
+      }
+      .nav ul a {
+        text-decoration: none;
+        color: bisque;
+        font-size: 25px;
+      }
+      .nav ul {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #table td tr th {
+        border: 1px solid rgb(204, 78, 78);
+      }
+      td {
+        padding: 20px;
+
+        border: 1px solid black;
+      }
+      th {
+        padding: 20px;
+
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <div class="nav">
+      <ul>
+        <li><a href="./Home.html">Home</a></li>
+        <li><a href="./Dashboard.html">Dashboard</a></li>
+        <li><a href="./Mybook.html">MyBook</a></li>
+        <li><a href="./Bookmark.html">Bookmark</a></li>
+      </ul>
+    </div>
+    <div>
+      <h1>Bookmark</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Added Date</th>
+            <th>Category</th>
+            <th id="delete" onclick="deleteFunction()">Delete</th>
+          </tr>
+        </thead>
+
+        <tbody></tbody>
+      </table>
+    </div>
+  </body>
+</html>
+
+<script>
+  let buy_list = JSON.parse(localStorage.getItem('bookmark-list')) || [];
+
+  buy_list.map((el, index) => {
+    var tbody = document.querySelector('tbody');
+
+    let tr = document.createElement('tr');
+
+    let td = document.createElement('td');
+    td.innerText = el.Book_name;
+
+    let td1 = document.createElement('td');
+    td1.innerText = el.Book_Auth;
+
+    let td2 = document.createElement('td');
+    td2.innerText = el.Book_desc;
+
+    let td3 = document.createElement('td');
+    td3.innerText = el.Book_price;
+
+    let td4 = document.createElement('td');
+    td4.innerText = el.Book_date;
+
+    let td5 = document.createElement('td');
+    td5.innerText = el.Book_cat;
+
+    let td6 = document.createElement('td');
+    td6.innerHTML = '<button>Delete</button>';
+    td6.addEventListener('click', () => {
+      deleteFunction(el);
+    });
+
+    tr.append(td, td1, td2, td3, td4, td5, td6);
+
+    tbody.append(tr);
+  });
+  function deleteFunction(el) {
+    const deleter = buy_list.filtter((item) => {
+      return item.el != el;
+    });
+  }
+</script>
